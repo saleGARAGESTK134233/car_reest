@@ -11,7 +11,7 @@ window = display.set_mode(
 img_back=" st4_big.jpg " 
 img_hero="pngtree-sniper-score-lens-png-image_1729776.jpg" 
 img_enemy="480494456.png" 
-img_back="png-transparent-paper-asteroid-sticker-adhesive-planet-asteroid-child-sleep-slate.png"
+img_back="png-transparent-paper-AIR-sticker-adhesive-planet-asteroid-child-sleep-slate.png"
 score = 0 
 lost = 0 
 goal = 20
@@ -54,29 +54,68 @@ num_fire = 0
 life = 3
 for b in bullets:
     b.kill() 
-for m in monsters:
+for m in bad
     m.kill() 
-for a in asteroids:
+for a in:avia
     a.kill()
 
-time.delay(3000) 
+time.delay(3000)  
 for i  in range (1,6): 
     monster = Enemy(img_enemy, randint(80, win_width - 80),-40, 80 , 50 , randint(1,5)) 
     monsters.add(monster) 
 for i in range(1 , 3) :
-    asteroid = Enemy(img_ast, randint(30, win_width - 30)) ,-40, 80, 50 randint(1, 7) 
+    AIR = Enemy(img_ast, randint(30, win_width - 30)) ,-40, 80, 50 randint(1, 7) 
     asteroids.add(asteroid)
 
 rel_time = False 
 
-collides =  sprite.groupcollide(monsters , bullets , True , True) 
 for c in collides: 
     score = score + 1
     monster = Enemy(img_enemy, randint(80, win_width - 80), -40 , 80 , 50 , randint(1, 5)) 
     monsters.add(monster) 
 
-if sprite.spritecollide(ship , monsters , False ) or sprite.spritecollide(ship , asteroids , False):
+if sprite.spritecollide(AIM ,AIR,  , False ) or sprite.spritecollide(AIM  , AIRS , False):
 
+
+
+num fire = 0
+
+run =  True 
+Bullets = sprite.Group()
+while run:
+    for e in event.get(): 
+        if e.type == QUIT: 
+            run = False  
+        elif e.type == keydown:
+            if e.key == K_SPACE:
+                if num_fire <5 and rel_time == False:
+                    num_fire = num_fire + 1 
+                    fire_sound.play() 
+                    ship.fire 
+
+                if num_fire >=5 and  rel_time == False :
+                    last_time = timer() 
+                    rel_time = True  
+
+    if not finish:
+        window.blit(background, (0,0)) 
+        text = font2.render("счёт:" +str(score), 1, (255, 255, 255)) 
+        window.blit(text,(10, 20)) 
+
+        text_lose = font2.render("пропущено:" + str(lost), 1, (255, 255 , 255)) 
+
+    ship.update() 
+    monsters.update() 
+    bullets.update() 
+      rel_time = False 
+
+collides =  sprite.groupcollide(monsters , bullets , True , True) 
+for c in collides: 
+    score = score + 1
+    AIR = Enemy(img_enemy, randint(80, win_width - 80), -40 , 80 , 50 , randint(1, 5)) 
+    monsters.add(monster) 
+
+if sprite.spritecollide(AIM AIR,  , False ) or sprite.spritecollide( AIM ,AIR ,  , False):
 
 
 num fire = 0
@@ -108,4 +147,38 @@ while run:
     ship.update() 
     monsters.update() 
     bullets.update() 
-      
+
+
+if rel_time  == True: 
+    now_time = timer() 
+
+    if now_time - last_time < 3: 
+        reload = font2.render('перезарядка...',1, (150, 0 ,0)) 
+        window.blit(reload , (260 , 460)) 
+    else:
+        num_fire = 0 
+         rel_time = False
+ 
+
+
+
+collides = sprite.groupcollide(AIR s, bullets, True, True ) 
+for c in collides: 
+    score = score + 1 
+    AIR = Enemy(img_enemy , randint(80,)-40, 80, 50 ,randint (1,5))
+    monsters.add(monster)
+
+if sprite.spritecollide(AIM, AIR , False) or lost >= max_lost:
+    finish = True 
+    window.blit(lose, (200 , 200)) 
+
+    if score >= goal: 
+        finish = True 
+        widow.blit(win ,(200 , 200))    
+
+
+if life == 3: 
+    life_color =  (0, 150, 0) 
+if life == 2:
+    life_color = (150, 150 , 0) 
+if  life==1 
